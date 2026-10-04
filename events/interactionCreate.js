@@ -1,0 +1,3 @@
+const fs=require("fs"),path=require("path");
+const commands=new Map(); for(const file of fs.readdirSync(path.join(__dirname,"../commands")).filter(f=>f.endsWith(".js"))){const c=require(path.join(__dirname,"../commands",file));commands.set(c.data.name,c);}
+module.exports=(client)=>{client.on("interactionCreate",async interaction=>{if(!interaction.isChatInputCommand())return;const command=commands.get(interaction.commandName);if(!command)return;try{await command.execute(interaction);}catch(e){console.error(e);const msg={content:"❌ Something went wrong while running that command.",ephemeral:true};if(interaction.replied||interaction.deferred)await interaction.followUp(msg);else await interaction.reply(msg);}});};
