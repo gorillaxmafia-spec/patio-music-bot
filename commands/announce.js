@@ -1,0 +1,2 @@
+const { SlashCommandBuilder }=require("discord.js"); const {OWNER_ID,GAME}=require("../config");
+module.exports={data:new SlashCommandBuilder().setName("announce").setDescription("Owner-only announcement").addStringOption(o=>o.setName("message").setDescription("Announcement").setRequired(true)),async execute(i){if(i.user.id!==OWNER_ID)return i.reply({content:"❌ Owner only.",ephemeral:true});return i.reply(`📢 **${GAME} Announcement**\n${i.options.getString("message",true)}`);}};
