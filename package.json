@@ -1,0 +1,8 @@
+{
+  "name":"og-appan-game-bot",
+  "version":"2.0.0",
+  "main":"index.js",
+  "scripts":{"start":"node index.js"},
+  "engines":{"node":">=20"},
+  "dependencies":{"discord.js":"^14.25.1","dotenv":"^17.2.3"}
+}
