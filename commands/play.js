@@ -1,2 +1,0 @@
-const { SlashCommandBuilder }=require("discord.js"); const {profile,money}=require("../utils/profile");
-module.exports={data:new SlashCommandBuilder().setName("play").setDescription("Play a random OG APPAN round"),async execute(i){const p=profile(i.user.id,i.user.username),win=Math.random()<0.5,a=win?200:50;if(win){p.coins+=a;p.wins++;p.xp+=40;return i.reply(`🎉 You won **${money(a)} coins**! 💰 ${money(p.coins)}`);}p.coins=Math.max(0,p.coins-a);p.losses++;return i.reply(`😢 You lost **${money(a)} coins**. 💰 ${money(p.coins)}`);}};
