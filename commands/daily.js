@@ -1,2 +1,0 @@
-const { SlashCommandBuilder }=require("discord.js"); const {profile,money}=require("../utils/profile");
-module.exports={data:new SlashCommandBuilder().setName("daily").setDescription("Claim your daily reward"),async execute(i){const p=profile(i.user.id,i.user.username),now=Date.now();if(now-(p.lastDaily||0)<86400000){const h=Math.ceil((86400000-(now-p.lastDaily))/3600000);return i.reply({content:`⏳ Daily reward is available in about **${h}h**.`,ephemeral:true});}const a=500+p.level*100;p.coins+=a;p.lastDaily=now;return i.reply(`🎁 Daily reward: **+${money(a)} coins**!`);}};
