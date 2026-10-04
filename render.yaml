@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: patio-music
+    runtime: node
+    buildCommand: >-
+      python3 -m venv .venv &&
+      .venv/bin/pip install -U "yt-dlp[default]" bgutil-ytdlp-pot-provider &&
+      git clone --depth 1 --branch 2.0.0 https://github.com/Brainicism/bgutil-ytdlp-pot-provider.git .bgutil &&
+      cd .bgutil/server && npm ci && npx tsc && cd ../.. &&
+      YOUTUBE_DL_SKIP_DOWNLOAD=true npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_VERSION
+        value: 22.12.0
+      - key: DISCORD_TOKEN
+        sync: false
+      - key: CLIENT_ID
+        sync: false
+      - key: GUILD_ID
+        sync: false
