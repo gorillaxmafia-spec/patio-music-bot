@@ -1,2 +1,0 @@
-const { SlashCommandBuilder }=require("discord.js"); const {db,money}=require("../utils/profile"); const {GAME}=require("../config");
-module.exports={data:new SlashCommandBuilder().setName("leaderboard").setDescription("View top players"),async execute(i){const arr=[...db.values()].sort((a,b)=>(b.coins+b.bank)-(a.coins+a.bank)).slice(0,10);return i.reply(`🏆 **${GAME} Leaderboard**\n${arr.length?arr.map((x,n)=>`**${n+1}.** <@${x.id}> — 💰 ${money(x.coins+x.bank)}`).join("\n"):"No players yet."}`);}};
